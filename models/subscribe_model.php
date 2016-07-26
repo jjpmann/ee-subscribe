@@ -9,7 +9,7 @@ class Subscribe_model extends CI_Model
     
     public function __construct()
     {
-        $this->driver = new Subscribe\Drivers\RealMagenetDriver();
+        $this->driver = new Subscribe\Drivers\RealMagnetDriver();
     }
 
 

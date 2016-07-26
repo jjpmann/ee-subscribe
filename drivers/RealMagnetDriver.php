@@ -2,7 +2,7 @@
 
 namespace Subscribe\Drivers;
 
-class RealMagenetDriver extends Driver
+class RealMagnetDriver extends Driver
 {
 
     protected $client;
@@ -20,7 +20,7 @@ class RealMagenetDriver extends Driver
         return $this->client->getGroups();
     }
 
-    public fucntion group($id)
+    public function group($id)
     {
 
     } 
