@@ -4,28 +4,31 @@ class Subscribe_model extends CI_Model
 {
 
     protected $emma;
+
+    protected $driver;
     
     public function __construct()
     {
-        $this->emma = $this->emma_get_api_object();
+        $this->driver = new Subscribe\Drivers\RealMagenetDriver();
     }
-    
-    public function emma_get_api_object()
+
+
+    public function groups()
     {
+
+        $groups = $this->driver->groups();
+        //echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $groups ); exit;
+
+        return $groups;
+    }
+
+    public function group($id)
+    {
+        $group = $this->driver->group($id);
+        //$group = $rm->getGroupDetails(3361091);
+        echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $group ); exit;
         
-        // $this->q = new EMMAAPI(
-        //         ee()->config->item('emma_api_key'), 
-        //         ee()->config->item('emma_username'),
-        //         ee()->config->item('emma_password')
-        // );
-
-        // return $this->q;
-    }        
-
-
-    public function lists()
-    {
-        return array();
+        return $group;
     }
 
 

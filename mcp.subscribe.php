@@ -114,39 +114,37 @@ class Subscribe_mcp
           {
             $first_day=date('Y-m')."-01";
             $first_day_time=strTotime($first_day);//first day of month
-            /*$members=  (ee()->subscribe_model->getGroupMembers($group->member_group_id));
-            foreach($members as $member)
-            {
-                $time_date=str_replace('@D:','',$member->member_since);
-                $time_date=str_replace('T',' ', $time_date);
-                $member_since_time=strtotime($time_date);
-                if($member_since_time > $first_day_time && $member->status=="active")
-                {
-                    $new_subscriber_count++;
-                }
-            }*/
+    
             $attr = array(
                 'onclick'=>"return confirm('Are you sure to Delete this Group?')"
             );            
             $actions = array(
-              anchor( $this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group->member_group_id,lang('Rename')),
-              anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group->member_group_id.'&group_id='.$group->member_group_id,lang('Delete'),$attr),
-              ee()->config->item('subscribe_default_group') != $group->member_group_id ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group->member_group_id , lang('Set as default')) : ""
+              anchor( $this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group['GroupID'],lang('Rename')),
+              anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group['GroupID'].'&group_id='.$group['GroupID'],lang('Delete'),$attr),
+              ee()->config->item('subscribe_default_group') != $group['GroupID'] ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group['GroupID'] , lang('Set as default')) : ""
             );  
             $rows[] = array(
               $i,  
-              anchor( $this->base.AMP.'method=subscribe_group_details&id='.$group->member_group_id,$group->group_name),
-              $group->active_count+$group->optout_count+$group->error_count,
-              $group->active_count,
-              $group->optout_count,
+              anchor( $this->base.AMP.'method=subscribe_group_details&id='.$group['GroupID'],$group['GroupName']),
+              //$group->active_count+$group->optout_count+$group->error_count,
+              //$group->active_count,
+              //$group->optout_count,
              // $new_subscriber_count,
-              ($group->group_type=='g')?lang('Regular'):lang('Test'),      
+             // '',//($group->group_type=='g')?lang('Regular'):lang('Test'),      
               implode(' | ', $actions),
             );  
             $i++; 
          }    
         }
-        $header=array(lang('No:'),lang('Name'), lang('Total Users'), lang('Active'), lang('Opt out'),lang('Type'), lang('Actions'));
+        $header = array(
+            lang('No:'),
+            lang('Name'), 
+        //    lang('Total Users'), 
+        //    lang('Active'), 
+        //    lang('Opt out'), 
+        //    lang('Type'), 
+            lang('Actions')
+        );
         ee()->view->cp_page_title = lang('Lists');
         //ee()->cp->set_variable('cp_page_title', lang('Subscribe Lists'));
 
@@ -273,8 +271,11 @@ class Subscribe_mcp
     public function subscribe_group_details()
     {
         ee()->load->library('table');
-        $group=$_GET['id'];
-        $members=ee()->subscribe_model->getGroupMembers($group);
+        $group = $_GET['id'];
+        $members = ee()->subscribe_model->group($group);
+
+        echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $members ); exit;
+        
         $rows = array();
         $i=1;
         foreach($members as $member)
