@@ -12,8 +12,11 @@
             "homepage": "http://github.com/jjpmann"
         }
     ],
-
-    
+    "autoload": {
+        "psr-4": {
+            "Subscribe\\": "."
+        }
+    },
     "require": {
         "php": ">=5.3.10",
         "composer/installers": ">=1.1.0",

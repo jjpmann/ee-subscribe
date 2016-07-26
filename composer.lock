@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2905520604394a38ab737f4e938a9da2",
+    "hash": "724bbb203162477fbf98249e81e236cc",
     "content-hash": "1bb3d6edf149869cc2efe21040ac953d",
     "packages": [
         {
@@ -282,16 +282,16 @@
         },
         {
             "name": "jjpmann/real-magnet-sdk",
-            "version": "v0.0.1",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jjpmann/real-magnet-sdk.git",
-                "reference": "5e07c376f86d99b8f9fe730b0e5d17b69d6a32a6"
+                "reference": "8fbfefbd958b5c19b52b4476fe7a1ad381986ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jjpmann/real-magnet-sdk/zipball/5e07c376f86d99b8f9fe730b0e5d17b69d6a32a6",
-                "reference": "5e07c376f86d99b8f9fe730b0e5d17b69d6a32a6",
+                "url": "https://api.github.com/repos/jjpmann/real-magnet-sdk/zipball/8fbfefbd958b5c19b52b4476fe7a1ad381986ee2",
+                "reference": "8fbfefbd958b5c19b52b4476fe7a1ad381986ee2",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
                 "php",
                 "real-magnet"
             ],
-            "time": "2016-07-26 16:01:40"
+            "time": "2016-07-26 16:16:37"
         },
         {
             "name": "psr/http-message",
