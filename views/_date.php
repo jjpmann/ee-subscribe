@@ -1,0 +1,1 @@
+<input type="checkbox" id="edit-check-asdsad" name="radio" value="check[asdsad]" class="form-checkbox">  <label class="option" for="edit-check-asdsad">asdsad </label><input type="checkbox" id="edit-check-dum" name="radio" value="check[dum]" class="form-checkbox">  <label class="option" for="edit-check-dum">dum </label>

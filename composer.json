@@ -1,0 +1,22 @@
+{   
+    "name": "jjpmann/ee-subscribe",
+    "type": "ee2-addon",
+    "description": "Subscribe module for Real Magnet and others with Freeform Field type.",
+    "keywords": ["eecms", "ee2", "subscribe", "real magnet", "emma", "freeform"],
+    "homepage": "http://github.com/jjpmann/ee-subscribe",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jerry Price",
+            "email": "jjpmann@gmail.com",
+            "homepage": "http://github.com/jjpmann"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.10",
+        "composer/installers": ">=1.1.0"
+    },
+    "extra": {
+        "installer-name": "subscribe"
+    }
+}
