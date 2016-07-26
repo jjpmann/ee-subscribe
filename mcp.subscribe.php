@@ -131,7 +131,7 @@ class Subscribe_mcp
               //$group->optout_count,
              // $new_subscriber_count,
              // '',//($group->group_type=='g')?lang('Regular'):lang('Test'),      
-              implode(' | ', $actions),
+              '' //implode(' | ', $actions),
             );  
             $i++; 
          }    

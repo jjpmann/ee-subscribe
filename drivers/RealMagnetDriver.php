@@ -12,7 +12,7 @@ class RealMagnetDriver extends Driver
         $username = env('REALMAGNET_USERNAME', ee()->config->item('realmagnet_username'));
         $password = env('REALMAGNET_PASSWORD', ee()->config->item('realmagnet_password'));
 
-        $this->client  = new RealMagnet\RealMagnet($username, $password, new RealMagnet\RealMagnetClient());
+        $this->client  = new \RealMagnet\RealMagnet($username, $password, new \RealMagnet\RealMagnetClient());
     }
 
     public function groups()
