@@ -13,7 +13,7 @@ class Subscribe_model extends CI_Model
     }
 
 
-    public function groups()
+    public function lists()
     {
 
         $groups = $this->driver->groups();
