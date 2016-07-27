@@ -15,12 +15,16 @@ class Subscribe_model extends CI_Model
 
     public function lists()
     {
-
         $groups = $this->driver->groups();
         //echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $groups ); exit;
-
         return $groups;
     }
+
+    public function getGroups()
+    {
+        return $this->lists();
+    }
+
 
     public function group($id)
     {
@@ -31,11 +35,16 @@ class Subscribe_model extends CI_Model
         return $group;
     }
 
-
-    public function getGroups()
+    public function getFields()
     {
-        return $this->emma->list_groups('g,t');
+        return $this->driver->fields();
     }
+
+    public function signup(Array $user, Array $groups)
+    {
+        return $this->driver->signup($user, $groups);
+    }
+
 
     public function getGroupMembers($group_id)
     {
@@ -90,13 +99,8 @@ class Subscribe_model extends CI_Model
     
     public function getEmmaGroupInfo($group_id)
     {
-        return ($this->emma->get_group_detail($group_id));
+        return $this->emma->get_group_detail($group_id);
     }    
-    
-    public function getFields()
-    {
-        return ($this->emma->get_field_list(1));
-    }
     
     public function getMemberGroups($member_id)
     {

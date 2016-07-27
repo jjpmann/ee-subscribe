@@ -32,16 +32,16 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $text = isset($data['text']) ? $data['text'] : false;
         $form = isset($data['form']) ? $data['form'] : false;
 
-        $groups =  ee()->subscribe_model->getGroups();
+        $groups =  ee()->subscribe_model->lists();
 
         $options = array();
 
         foreach ($groups as $id => $group) {
-            $options[$group->member_group_id] = $group->group_name;
+            $options[$group->id] = $group->name;
         }
 
         ee()->table->add_row(
-           'Emma List <div class="subtext">Selet the list users will sign up to.</div>',
+           'List <div class="subtext">Selet the list users will sign up to.</div>',
             form_dropdown('subscribe_list', $options, $list)
         );
 
@@ -97,6 +97,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
     public function save ($data)
     {
+        
         // Does not fire on opt-in if checkbox is not selected
         $fields = ee()->subscribe_model->getFields();
 
@@ -105,16 +106,19 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $groups[]   = $settings['list'];
         $form       = $settings['form'];
 
+        //echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $data, $fields, $settings ); exit;
+
         $email      = ee()->input->post('email');
         $user       = array();
 
         foreach ($fields as $key => $field) {
-            $v = $field->shortcut_name;
+            $v = $field->id;
+            
             $user[$v] = ee()->input->post($v);
 
             if (isset($this->fields[$v])) {
                 $n = $this->fields[$v];
-                $user[$field->shortcut_name] = ee()->input->post($n);
+                $user[$field->id] = ee()->input->post($n);
             }
         }
 
@@ -132,11 +136,13 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             }
         }
 
+
         if ($add && $settings['entry_id'] == 0) {
             // new user
+            $response = ee()->subscribe_model->signup($user, $groups);
+
+            echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $response ); exit;
             
-            
-            $response = ee()->subscribe_model->signup($email, $user, $groups, $form);
 
             if (isset($response->member_id)) {
                 $return .= "Added ({$response->member_id})";

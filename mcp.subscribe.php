@@ -125,7 +125,7 @@ class Subscribe_mcp
             );  
             $rows[] = array(
               $i,  
-              anchor( $this->base.AMP.'method=subscribe_group_details&id='.$group->id,$group->id),
+              anchor( $this->base.AMP.'method=subscribe_group_details&id='.$group->id,$group->name),
               //$group->active_count+$group->optout_count+$group->error_count,
               //$group->active_count,
               //$group->optout_count,
