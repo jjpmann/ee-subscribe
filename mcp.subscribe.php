@@ -119,13 +119,13 @@ class Subscribe_mcp
                 'onclick'=>"return confirm('Are you sure to Delete this Group?')"
             );            
             $actions = array(
-              anchor( $this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group['GroupID'],lang('Rename')),
-              anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group['GroupID'].'&group_id='.$group['GroupID'],lang('Delete'),$attr),
-              ee()->config->item('subscribe_default_group') != $group['GroupID'] ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group['GroupID'] , lang('Set as default')) : ""
+              anchor( $this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group->id,lang('Rename')),
+              anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group->id.'&group_id='.$group->id,lang('Delete'),$attr),
+              ee()->config->item('subscribe_default_group') != $group->id ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group->id , lang('Set as default')) : ""
             );  
             $rows[] = array(
               $i,  
-              anchor( $this->base.AMP.'method=subscribe_group_details&id='.$group['GroupID'],$group['GroupName']),
+              anchor( $this->base.AMP.'method=subscribe_group_details&id='.$group->id,$group->id),
               //$group->active_count+$group->optout_count+$group->error_count,
               //$group->active_count,
               //$group->optout_count,
