@@ -27,7 +27,7 @@ class Subscribe_mcp
                 ee()->cp->set_right_nav(array(
                     'settings'  => $this->base.AMP.'method=settings',
                     'subscribe_list_manage'  => $this->base.AMP.'method=subscribe_lists',
-                    'subscribe_stats'    => $this->base.AMP.'method=subscribe_stats',
+                   // 'subscribe_stats'    => $this->base.AMP.'method=subscribe_stats',
                 ));
         ee()->load->model('subscribe_model');
         // uncomment this if you want navigation buttons at the top
@@ -111,6 +111,11 @@ class Subscribe_mcp
     {
         ee()->load->library('table');
         $rows = $groups = array();
+
+        if (!ee()->subscribe_model->check()) {
+            return ee()->load->view('error', array(), true);
+        }
+
         $groups = ee()->subscribe_model->lists();
 
         $i=1;
@@ -579,6 +584,11 @@ Code for Subscribe Stats
 */    
     public function subscribe_stats()
     {
+
+        if (!ee()->subscribe_model->check()) {
+            return ee()->load->view('error', array(), true);
+        }
+
         ee()->load->library('table');
 
         ee()->view->cp_page_title = lang('Mailings');
