@@ -1,65 +1,60 @@
 <?php
 
 /**
- * @package     Subscribe
- * @subpackage  ThirdParty
  * @category    Modules
+ *
  * @author      Jerry Price
+ *
  * @link        https://github.com/jjpmann
  */
-class Subscribe_upd {
-        
-    var $version        = '1.0'; 
-    var $module_name    = "Subscribe";
-    
-    public function __construct( $switch = TRUE ) 
-    { 
-        
-    } 
+class Subscribe_upd
+{
+    public $version = '1.0';
+    public $module_name = 'Subscribe';
 
-    public function install() 
+    public function __construct($switch = true)
     {
-        $data = array(
+    }
+
+    public function install()
+    {
+        $data = [
             'module_name'    => $this->module_name,
             'module_version' => $this->version,
-            'has_cp_backend' => 'y'
-        );
+            'has_cp_backend' => 'y',
+        ];
 
-        ee()->db->insert('modules', $data);        
+        ee()->db->insert('modules', $data);
 
         //
         // Add additional stuff needed on module install here
-        // 
+        //
 
-        return TRUE;
+        return true;
     }
 
-
-    public function uninstall() 
-    {               
-        
+    public function uninstall()
+    {
         ee()->db->select('module_id');
-        $query = ee()->db->get_where('modules', array('module_name' => $this->module_name));
-        
+        $query = ee()->db->get_where('modules', ['module_name' => $this->module_name]);
+
         ee()->db->where('module_id', $query->row('module_id'));
         ee()->db->delete('module_member_groups');
-        
+
         ee()->db->where('module_name', $this->module_name);
         ee()->db->delete('modules');
-        
+
         ee()->db->where('class', $this->module_name);
         ee()->db->delete('actions');
-        
+
         ee()->db->where('class', $this->module_name.'_mcp');
         ee()->db->delete('actions');
 
-        return TRUE;
+        return true;
     }
-    
 
     public function update($current = '')
     {
-        return FALSE;
+        return false;
     }
-
 }

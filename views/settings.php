@@ -1,47 +1,47 @@
 
 
 <?php
-$attributes = array('id' => 'subscribe_settings_form');
-echo form_open($action_url,$attributes);
+$attributes = ['id' => 'subscribe_settings_form'];
+echo form_open($action_url, $attributes);
 
 $this->table->set_template($cp_pad_table_template);
 $this->table->set_heading(
-    array('data' => lang('preference'), 'style' => 'width:50%;'),
+    ['data' => lang('preference'), 'style' => 'width:50%;'],
     lang('setting')
 );
 
-    $this->table->add_row(array(
+    $this->table->add_row([
             lang('realmagnet_username', 'realmagnet_username'),
-            form_input('realmagnet_username', $realmagnet_username, 'class="field"')
-        )
+            form_input('realmagnet_username', $realmagnet_username, 'class="field"'),
+        ]
     );
-        $this->table->add_row(array(
+        $this->table->add_row([
             lang('realmagnet_password', 'realmagnet_password'),
-            form_password('realmagnet_password', $realmagnet_password, 'class="field"')
-        )
+            form_password('realmagnet_password', $realmagnet_password, 'class="field"'),
+        ]
     );
 
-	// $this->table->add_row(array(
-	// 		lang('subscribe_api_key', 'subscribe_api_key'),
-	// 		form_input('subscribe_api_key', $subscribe_api_key, 'class="field"')
-	// 	)
-	// );
+    // $this->table->add_row(array(
+    // 		lang('subscribe_api_key', 'subscribe_api_key'),
+    // 		form_input('subscribe_api_key', $subscribe_api_key, 'class="field"')
+    // 	)
+    // );
  //    	$this->table->add_row(array(
-	// 		lang('subscribe_username', 'subscribe_username'),
-	// 		form_input('subscribe_username', $subscribe_username, 'class="field"')
-	// 	)
-	// );
-	// $this->table->add_row(array(
-	// 		lang('subscribe_password', 'subscribe_password'),
-	// 		form_password('subscribe_password', $subscribe_password, 'class="password"')
-	// 	)
-	// );
-	
+    // 		lang('subscribe_username', 'subscribe_username'),
+    // 		form_input('subscribe_username', $subscribe_username, 'class="field"')
+    // 	)
+    // );
+    // $this->table->add_row(array(
+    // 		lang('subscribe_password', 'subscribe_password'),
+    // 		form_password('subscribe_password', $subscribe_password, 'class="password"')
+    // 	)
+    // );
+
 echo $this->table->generate();
 
 ?>
 
-	<?=form_submit(array('name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'))?>
+	<?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
 
 <?=form_close()?>
 

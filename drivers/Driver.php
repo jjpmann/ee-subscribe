@@ -2,7 +2,7 @@
 
 namespace Subscribe\Drivers;
 
-abstract class Driver 
+abstract class Driver
 {
     abstract public function groups();
 
