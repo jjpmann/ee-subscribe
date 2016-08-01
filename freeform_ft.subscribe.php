@@ -1,5 +1,6 @@
 <?php
 
+
 class Subscribe_freeform_ft extends Freeform_base_ft
 {
     public  $info   = array(
@@ -8,18 +9,17 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         'description'   => 'Allow to dynamically signup for Real Magnet lists and Others'
     );
 
-    public $show_label = FALSE;
+    public $show_label = false;
 
     // our fields to match emma fields
     protected $fields = array(
-        // Emma         =>FreeForm     =>  
         'name_first'    => 'first_name',
         'name_last'     => 'last_name'
     );
 
     protected $text = 'Join our mailing list';
 
-    public function __construct ()
+    public function __construct()
     {
         parent::__construct();
         ee()->load->model('subscribe_model');
@@ -27,10 +27,21 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
     public function display_settings ($data)
     {
-        $list = isset($data['list']) ? $data['list'] : false;
-        $type = isset($data['type']) ? $data['type'] : false;
-        $text = isset($data['text']) ? $data['text'] : false;
-        $form = isset($data['form']) ? $data['form'] : false;
+
+        if (!ee()->subscribe_model->check()) {
+            ee()->table->add_row(
+             '<h3>Error</h3>',
+             '<div class="subtext ss_notice">Your configuration is not working, please visit the settings page and update your username/password.</div>'
+            );
+
+            return;
+        }
+        
+
+        $list   = isset($data['list']) ? $data['list'] : false;
+        $type   = isset($data['type']) ? $data['type'] : false;
+        $text   = isset($data['text']) ? $data['text'] : false;
+        $field  = isset($data['field']) ? $data['field'] : false;
 
         $groups =  ee()->subscribe_model->lists();
 
@@ -62,8 +73,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         );
 
         ee()->table->add_row(
-           'Signup Form Id<div class="subtext">Will ensure that new subscribers receive any signup-based trigger emails associated with this signup form (the standard plaintext confirmation email will not be sent).</div>',
-            form_input('subscribe_form_id', $form)
+           'Email Field<div class="subtext">If the input field on the page is not "email" please entrer the name. (exp. the marketo form used "work_email")</div>',
+            form_input('subscribe_field', $field)
         );
         
     }
@@ -74,13 +85,13 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $list = ee()->input->post('subscribe_list');
         $type = ee()->input->post('subscribe_type');
         $text = ee()->input->post('subscribe_opt-in_text');
-        $form = ee()->input->post('subscribe_form_id');
+        $field = ee()->input->post('subscribe_field');
      
         return array(
             'list'  => $list,
             'type'  => $type,
             'text'  => $text,
-            'form'  => $form,
+            'field' => $field,
         );
     }
 
@@ -104,11 +115,9 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $settings   = $this->settings;
 
         $groups[]   = $settings['list'];
-        $form       = $settings['form'];
+        $input      = $settings['field'] ?: 'email';
 
-        //echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $data, $fields, $settings ); exit;
-
-        $email      = ee()->input->post('email');
+        $email      = ee()->input->post($input);
         $user       = array();
 
         foreach ($fields as $key => $field) {
@@ -120,6 +129,10 @@ class Subscribe_freeform_ft extends Freeform_base_ft
                 $n = $this->fields[$v];
                 $user[$field->id] = ee()->input->post($n);
             }
+        }
+
+        if ($email) {
+            $user['email'] = $email;
         }
 
         $add = true;
@@ -136,16 +149,12 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             }
         }
 
-
         if ($add && $settings['entry_id'] == 0) {
             // new user
             $response = ee()->subscribe_model->signup($user, $groups);
 
-            echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $response ); exit;
-            
-
-            if (isset($response->member_id)) {
-                $return .= "Added ({$response->member_id})";
+            if (isset($response['Error']) && $response['Error'] === 0) {
+                $return .= "{$response['Message']} ({$response['AdditionalParams']})";
             } else {
                 $return .= 'Failed';
             }

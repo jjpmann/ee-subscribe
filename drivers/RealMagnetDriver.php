@@ -7,6 +7,8 @@ class RealMagnetDriver extends Driver
 
     protected $client;
 
+    protected $active = false;
+
     protected $fields = [
         'first_name'    => 'First_Name',
         'last_name'     => 'Last_Name',
@@ -19,14 +21,31 @@ class RealMagnetDriver extends Driver
         $password = env('REALMAGNET_PASSWORD', ee()->config->item('realmagnet_password'));
 
         $this->client  = new \RealMagnet\RealMagnet($username, $password, new \RealMagnet\RealMagnetClient());
+
+        try {
+            $this->client->init();
+            $this->active = true;
+        } catch (\RealMagnet\RealMagnetException $e) {
+            //echo $e->getMessage();
+            
+        }
+        
+    }
+
+    public function isActive()
+    {
+        return $this->active;
     }
 
     public function groups()
     {
+        if (!$this->isActive()) {
+            return array();
+        }
         $groups = array();
 
         $_groups = $this->client->getGroups();
-
+        
         foreach ($_groups as $group) {
             $g = new \stdClass;
             $g->id      = $group['GroupID'];

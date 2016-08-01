@@ -12,6 +12,10 @@ class Subscribe_model extends CI_Model
         $this->driver = new Subscribe\Drivers\RealMagnetDriver();
     }
 
+    public function check()
+    {
+        return $this->driver->isActive();
+    }
 
     public function lists()
     {
