@@ -1,9 +1,10 @@
 <?php 
-    if($message)
-    {?>
+    if ($message) {
+        ?>
 
     <div> <span style="color:<?php echo $message_color?>"><?php echo $message?></span>
-<?php }  ?>
+<?php 
+    }  ?>
 <style type="text/css">
         #emma_subscribe_form { padding: 4px; margin: 0;  }
         #emma_subscribe_form label { padding: 4px 0; text-align: left; }
@@ -16,18 +17,18 @@
 </style>
 <?php
 
-    $attributes = array('id' => 'emma_subscribe_form');
-    echo form_open($action_url,$attributes);
-    $tmpl = array ( 'table_open'  => '<table width="100%" border="1" cellpadding="4px" cellspacing="1"' );
+    $attributes = ['id' => 'emma_subscribe_form'];
+    echo form_open($action_url, $attributes);
+    $tmpl =  ['table_open'  => '<table width="100%" border="1" cellpadding="4px" cellspacing="1"'];
     $this->table->set_template($tmpl);
-    $this->table->add_row(array(
-        '<label>Name</label>','<input type="text" name="name" id="name"/>'));
+    $this->table->add_row([
+        '<label>Name</label>', '<input type="text" name="name" id="name"/>', ]);
     //style="color: #565656; width: 95%; padding: 4px;" />'));
-    $this->table->add_row(array('<label>Email*</label>','<input type="email" name="email" id="email" required="true" />'));
+    $this->table->add_row(['<label>Email*</label>', '<input type="email" name="email" id="email" required="true" />']);
     echo $this->table->generate();
-    #echo form_hidden('emma_member_id', $member_id, 'class="field"');
-    
+    //echo form_hidden('emma_member_id', $member_id, 'class="field"');
+
     echo form_hidden('emma_subscribe', '1', 'class="field"')
 ?>
-	<?=form_submit(array('name' => 'submit', 'value' => lang('Submit')))?>
+	<?=form_submit(['name' => 'submit', 'value' => lang('Submit')])?>
 <?=form_close()?>    

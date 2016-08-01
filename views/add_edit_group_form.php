@@ -1,29 +1,28 @@
 
 <?php
-$attributes = array('id' => 'emma_add_edit_group_form');
-echo form_open($action_url,$attributes);
+$attributes = ['id' => 'emma_add_edit_group_form'];
+echo form_open($action_url, $attributes);
 $this->table->set_template($cp_pad_table_template);
 /*$this->table->set_heading(
     array('data' => lang('preference'), 'style' => 'width:50%;'),
     lang('setting')
 );*/
-$this->table->add_row(array(
+$this->table->add_row([
         lang('Group Name', 'Group Name'),
-        form_input('emma_group_name', $emma_group_name, 'class="field"')
-    )
-);    
-if(!$edit)
-{
-    $this->table->add_row(array(
+        form_input('emma_group_name', $emma_group_name, 'class="field"'),
+    ]
+);
+if (!$edit) {
+    $this->table->add_row([
             lang('Make this a Test Group', 'test_group'),
             form_checkbox('test_group', '1'),
-        )    
+        ]
     );
 }
 
 echo $this->table->generate();
 ?>
-<?=form_submit(array('name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'))?>
+<?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
 <?=form_close()?>
 		<script>$("#emma_add_edit_group_form").submit(function () {
         var return_value;

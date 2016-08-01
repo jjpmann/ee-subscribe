@@ -4,7 +4,6 @@ namespace Subscribe\Drivers;
 
 class RealMagnetDriver extends Driver
 {
-
     protected $client;
 
     protected $active = false;
@@ -20,16 +19,14 @@ class RealMagnetDriver extends Driver
         $username = env('REALMAGNET_USERNAME', ee()->config->item('realmagnet_username'));
         $password = env('REALMAGNET_PASSWORD', ee()->config->item('realmagnet_password'));
 
-        $this->client  = new \RealMagnet\RealMagnet($username, $password, new \RealMagnet\RealMagnetClient());
+        $this->client = new \RealMagnet\RealMagnet($username, $password, new \RealMagnet\RealMagnetClient());
 
         try {
             $this->client->init();
             $this->active = true;
         } catch (\RealMagnet\RealMagnetException $e) {
             //echo $e->getMessage();
-            
         }
-        
     }
 
     public function isActive()
@@ -40,17 +37,17 @@ class RealMagnetDriver extends Driver
     public function groups()
     {
         if (!$this->isActive()) {
-            return array();
+            return [];
         }
-        $groups = array();
+        $groups = [];
 
         $_groups = $this->client->getGroups();
-        
+
         foreach ($_groups as $group) {
-            $g = new \stdClass;
-            $g->id      = $group['GroupID'];
-            $g->name    = $group['GroupName'];
-            $g->data    = $group;
+            $g = new \stdClass();
+            $g->id = $group['GroupID'];
+            $g->name = $group['GroupName'];
+            $g->data = $group;
             $groups[] = $g;
         }
 
@@ -60,30 +57,29 @@ class RealMagnetDriver extends Driver
     public function group($id)
     {
         return $this->client->getGroupDetails($id);
-    } 
+    }
 
     public function fields()
     {
-        $fields = array();
+        $fields = [];
         $_fields = $this->client->getRecipientFields(1);
 
         if (isset($_fields['CustomFields'])) {
             foreach ($_fields['CustomFields'] as $field) {
-
-                $f = new \stdClass;
-                $f->id      = strtolower($field['FieldName']);
-                $f->name    = $field['FieldName'];
-                $f->label   = $field['Label'];
+                $f = new \stdClass();
+                $f->id = strtolower($field['FieldName']);
+                $f->name = $field['FieldName'];
+                $f->label = $field['Label'];
                 //$f->data    = $group;
                 $fields[] = $f;
             }
         }
-        
+
         return $fields;
     }
 
     public function user($email)
-    {   
+    {
         $user = new \stdClass();
         $user->email = $email;
 
@@ -100,21 +96,20 @@ class RealMagnetDriver extends Driver
         $u->email = $user['email'];
         $u->groups = $groups;
 
-        // does user exists?? 
+        // does user exists??
         $find = $this->user($user['email']);
 
         if (empty($find)) {
-            $add =  $this->client->addRecipient($u);
+            $add = $this->client->addRecipient($u);
+
             return $add;
-        }  
+        }
 
         $current = $find[0];
         $id = $current['ID'];
-        $edit =  $this->client->editRecipient($id, $u);
-        
-        // Recipient updated successfully 
+        $edit = $this->client->editRecipient($id, $u);
+
+        // Recipient updated successfully
         return $edit;
-
     }
-
 }
