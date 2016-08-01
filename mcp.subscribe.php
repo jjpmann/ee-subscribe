@@ -60,6 +60,12 @@ class Subscribe_mcp
         //ee()->cp->set_variable('cp_breadcrumbs', array(
         //  $this->base => lang('Subscribe')));
 
+                                                    
+        $vars['realmagnet_username']   = env('REALMAGNET_USERNAME', ee()->config->item('realmagnet_username'));
+        $vars['realmagnet_password']   = env('REALMAGNET_PASSWORD', ee()->config->item('realmagnet_password'));
+        
+        
+
         $vars['subscribe_api_key']   = (ee()->config->item('subscribe_api_key'));
         $vars['subscribe_username']  = (ee()->config->item('subscribe_username'));
         $vars['subscribe_password']  = (ee()->config->item('subscribe_password'));

@@ -10,21 +10,32 @@ $this->table->set_heading(
     lang('setting')
 );
 
-	$this->table->add_row(array(
-			lang('subscribe_api_key', 'subscribe_api_key'),
-			form_input('subscribe_api_key', $subscribe_api_key, 'class="field"')
-		)
-	);
-    	$this->table->add_row(array(
-			lang('subscribe_username', 'subscribe_username'),
-			form_input('subscribe_username', $subscribe_username, 'class="field"')
-		)
-	);
-	$this->table->add_row(array(
-			lang('subscribe_password', 'subscribe_password'),
-			form_password('subscribe_password', $subscribe_password, 'class="password"')
-		)
-	);
+    $this->table->add_row(array(
+            lang('realmagnet_username', 'realmagnet_username'),
+            form_input('realmagnet_username', $realmagnet_username, 'class="field"')
+        )
+    );
+        $this->table->add_row(array(
+            lang('realmagnet_password', 'realmagnet_password'),
+            form_password('realmagnet_password', $realmagnet_password, 'class="field"')
+        )
+    );
+
+	// $this->table->add_row(array(
+	// 		lang('subscribe_api_key', 'subscribe_api_key'),
+	// 		form_input('subscribe_api_key', $subscribe_api_key, 'class="field"')
+	// 	)
+	// );
+ //    	$this->table->add_row(array(
+	// 		lang('subscribe_username', 'subscribe_username'),
+	// 		form_input('subscribe_username', $subscribe_username, 'class="field"')
+	// 	)
+	// );
+	// $this->table->add_row(array(
+	// 		lang('subscribe_password', 'subscribe_password'),
+	// 		form_password('subscribe_password', $subscribe_password, 'class="password"')
+	// 	)
+	// );
 	
 echo $this->table->generate();
 

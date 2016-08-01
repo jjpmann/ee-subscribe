@@ -30,8 +30,6 @@ class Subscribe_model extends CI_Model
     {
         $group = $this->driver->group($id);
         //$group = $rm->getGroupDetails(3361091);
-        echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $group ); exit;
-        
         return $group;
     }
 

@@ -86,17 +86,14 @@ class RealMagnetDriver extends Driver
 
         if (empty($find)) {
             $add =  $this->client->addRecipient($u);
-            echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $added ); exit;
             return $add;
         }  
 
         $current = $find[0];
         $id = $current['ID'];
-
         $edit =  $this->client->editRecipient($id, $u);
         
         // Recipient updated successfully 
-        
         return $edit;
 
     }
