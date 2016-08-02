@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.3.10",
         "composer/installers": ">=1.1.0",
-        "jjpmann/real-magnet-sdk": ">=0.0.1"
+        "jjpmann/real-magnet-sdk": ">=0.0.4"
     },
     "extra": {
         "installer-name": "subscribe"
