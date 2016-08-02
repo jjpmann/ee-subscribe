@@ -7,8 +7,13 @@ class Subscribe_model extends CI_Model
     protected $driver;
 
     public function __construct()
-    {
-        $this->driver = new Subscribe\Drivers\RealMagnetDriver();
+    {   
+        try {
+            $this->driver = new Subscribe\Drivers\RealMagnetDriver();
+        } catch (\RealMagnet\RealMagnetException $e) {
+            
+        }
+        
     }
 
     public function check()
