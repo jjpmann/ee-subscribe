@@ -164,6 +164,12 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         return $data;
     }
 
+    public function install()
+    {
+        if (!ee()->subscribe_model->check()) {
+            return ee()->_mcp_reference->actions->full_stop(lang('subscribe_not_installed'));
+        }
+    }
 
     public function display_field($data = '', $params = array(), $attr = array())
     {
@@ -199,4 +205,5 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             'class' => 'form__label form__label--check',
         ]);
     }
+
 }

@@ -9,6 +9,7 @@ $lang['settings'] = 'Settings';
 $lang['subscribe_stats'] = 'Stats';
 $lang['subscribe_list_manage'] = 'Lists';
 
+$lang['subscribe_not_installed'] = 'The field cannot be installed until the subscribe module settings have been updated and is active.';
 
 
 $lang['subscribe_settings'] = 'Emma Settings';
