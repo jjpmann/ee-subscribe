@@ -25,7 +25,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         ee()->load->model('subscribe_model');
     }
 
-    public function display_settings($data)
+    public function display_settings($data = array())
     {
         if (!ee()->subscribe_model->check()) {
             ee()->table->add_row(
@@ -164,7 +164,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         return $data;
     }
 
-    public function display_field($data)
+
+    public function display_field($data = '', $params = array(), $attr = array())
     {
         if (ee()->input->get('module') == 'freeform' && ee()->input->get('method') == 'edit_entry') {
             $pattern = '/Added \((\d+)\)/';
