@@ -107,7 +107,8 @@ class RealMagnetDriver extends Driver
 
         $current = $find[0];
         $id = $current['ID'];
-        $edit = $this->client->editRecipient($id, $u);
+        // $edit = $this->client->editRecipient($id, $u);
+        
 
         // Recipient updated successfully
         return $edit;
