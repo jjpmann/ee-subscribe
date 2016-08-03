@@ -2,22 +2,26 @@
 
 <?php
 $attributes = ['id' => 'subscribe_settings_form'];
-echo form_open($action_url, $attributes);
+//echo form_open($action_url, $attributes);
 
 $this->table->set_template($cp_pad_table_template);
 $this->table->set_heading(
     ['data' => lang('preference'), 'style' => 'width:50%;'],
     lang('setting')
 );
-
+    $this->table->add_row([
+            '<strong>Real Magnent Settings</strong>',
+            'These settings should be set in your <strong>.env</strong> file.'
+        ]
+    );
     $this->table->add_row([
             lang('realmagnet_username', 'realmagnet_username'),
-            form_input('realmagnet_username', $realmagnet_username, 'class="field"'),
+            form_input('realmagnet_username', $realmagnet_username, 'class="field" disabled'),
         ]
     );
         $this->table->add_row([
             lang('realmagnet_password', 'realmagnet_password'),
-            form_password('realmagnet_password', $realmagnet_password, 'class="field"'),
+            form_password('realmagnet_password', $realmagnet_password, 'class="field" disabled'),
         ]
     );
 
@@ -39,12 +43,17 @@ $this->table->set_heading(
 
 echo $this->table->generate();
 
+
+/*
+
 ?>
 
 	<?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
 
 <?=form_close()?>
+*/
 
+?>
 		<script>$("#subscribe_settings_form").submit(function () {
         var return_value;
         fv_url=(("<?php echo htmlspecialchars_decode($fv_url)?>"));

@@ -47,7 +47,7 @@ class Subscribe_mcp
         //$this->_permissions_check();
         ee()->load->library('table');
 
-        $vars = ['action_url' => 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=emma'.AMP.'method=save_settings',
+        $vars = ['action_url' => $this->base.AMP.'method=save_settings',
         ];
 
         ee()->view->cp_page_title = lang('subscribe_settings');
@@ -75,9 +75,10 @@ class Subscribe_mcp
     public function subscribe_settings_validation()
     {
         ee()->load->library('form_validation');
-        ee()->form_validation->set_rules('subscribe_api_key', 'Subscribe Api Key', 'required');
-        ee()->form_validation->set_rules('subscribe_username', 'Subscribe Username', 'required');
-        ee()->form_validation->set_rules('subscribe_password', 'Subscribe Password', 'required');
+        // ee()->form_validation->set_rules('subscribe_api_key', 'Subscribe Api Key', 'required');
+        // ee()->form_validation->set_rules('subscribe_username', 'Subscribe Username', 'required');
+        // ee()->form_validation->set_rules('subscribe_password', 'Subscribe Password', 'required');
+        
         $valid_form = ee()->form_validation->run();
         if ($valid_form) {
             echo 1;
@@ -94,7 +95,7 @@ class Subscribe_mcp
         $insert['subscribe_username'] = ee()->input->post('subscribe_username');
         $insert['subscribe_password'] = ee()->input->post('subscribe_password');
 
-        ee()->config->_update_config($insert);
+        //ee()->config->_update_config($insert);
 
 
         ee()->session->set_flashdata('message_success', lang('settings_updated'));
@@ -112,6 +113,7 @@ class Subscribe_mcp
         }
 
         $groups = ee()->subscribe_model->lists();
+        
 
         $i = 1;
         if ($groups) {
@@ -123,13 +125,13 @@ class Subscribe_mcp
                 'onclick' => "return confirm('Are you sure to Delete this Group?')",
             ];
                 $actions = [
-              anchor($this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group->id, lang('Rename')),
-              anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group->id.'&group_id='.$group->id, lang('Delete'), $attr),
-              ee()->config->item('subscribe_default_group') != $group->id ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group->id, lang('Set as default')) : '',
+                    anchor($this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group['id'], lang('Rename')),
+                    anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group['id'].'&group_id='.$group['id'], lang('Delete'), $attr),
+                    ee()->config->item('subscribe_default_group') != $group['id'] ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group['id'], lang('Set as default')) : '',
             ];
                 $rows[] = [
               $i,
-              anchor($this->base.AMP.'method=subscribe_group_details&id='.$group->id, $group->name),
+              $group['name'], //   anchor($this->base.AMP.'method=subscribe_group_details&id='.$group['id'], $group['name']),
               //$group->active_count+$group->optout_count+$group->error_count,
               //$group->active_count,
               //$group->optout_count,
@@ -157,6 +159,7 @@ class Subscribe_mcp
         //  $this->base => lang('Subscribe')));
 
         $add_group_anchor = anchor($this->base.AMP.'method=subscribe_add_edit_group_form', lang('Add a New Group'));
+        
         $vars = ['rows'                  => $rows,
                       'header'           => $header,
                       'add_group_anchor' => $add_group_anchor,
@@ -172,15 +175,15 @@ class Subscribe_mcp
             $title = lang('Edit Group');
             $group_info = ee()->subscribe_model->getSubscribeGroupInfo($group_id);
             $vars = [
-                    'action_url'           => 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=emma'.AMP.'method=subscribe_edit_group_form_submit&id='.$group_id,
-                    'subscribe_group_name' => $group_info->group_name,
+                    'action_url'           => $this->base.AMP.'method=subscribe_edit_group_form_submit&id='.$group_id,
+                    'group_name' => $group_info->group_name,
                     'edit'                 => 1,
             ];
         } else {
             $title = lang('Add Group');
             $vars = [
-                    'action_url'           => 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=emma'.AMP.'method=subscribe_add_group_form_submit',
-                    'subscribe_group_name' => '',
+                    'action_url'           => $this->base.AMP.'method=subscribe_add_group_form_submit',
+                    'group_name' => '',
                     'edit'                 => 0,
             ];
         }
@@ -254,7 +257,7 @@ class Subscribe_mcp
     public function subscribe_default_group_submit()
     {
         $insert['subscribe_default_group'] = intval(ee()->input->get('id'));
-        ee()->config->_update_config($insert);
+        //ee()->config->_update_config($insert);
         ee()->functions->redirect($this->base.AMP.'method=subscribe_lists');
     }
 
@@ -331,7 +334,7 @@ class Subscribe_mcp
             }
 
 
-            $action_url = 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=emma'.AMP.'method=subscribe_add_user_form_submit&id='.$_GET['id'].'&group_id='.$_GET['group_id'];
+            $action_url = $this->base.AMP.'method=subscribe_add_user_form_submit&id='.$_GET['id'].'&group_id='.$_GET['group_id'];
             $fv_url = $this->base.AMP.'method=subscribe_add_user_form_validation&id='.$_GET['id'];
             $title = 'Edit a Member';
             $member_groups = (ee()->subscribe_model->getMemberGroups($_GET['id']));
@@ -339,7 +342,7 @@ class Subscribe_mcp
                 $member_group_ids[] = $group->member_group_id;
             }
         } else {
-            $action_url = 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=emma'.AMP.'method=subscribe_add_user_form_submit&group_id='.$_GET['group_id'];
+            $action_url = $this->base.AMP.'method=subscribe_add_user_form_submit&group_id='.$_GET['group_id'];
             $fv_url = $this->base.AMP.'method=subscribe_add_user_form_validation';
             $title = 'Add a new Member';
         }
@@ -404,7 +407,7 @@ class Subscribe_mcp
   //           );
         $vars = [
                         'user_status' => $user_status,
-                        'action_url'  => 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=emma'.AMP.'method=subscribe_edit_user_status_form_submit&id='.$_GET['id'].'&current_status='.$user_status.'&group_id='.$_GET['group_id'],
+                        'action_url'  => $this->base.AMP.'method=subscribe_edit_user_status_form_submit&id='.$_GET['id'].'&current_status='.$user_status.'&group_id='.$_GET['group_id'],
         ];
 
         return ee()->load->view('edit_user_status_form', $vars, true);

@@ -9,7 +9,7 @@ $this->table->set_template($cp_pad_table_template);
 );*/
 $this->table->add_row([
         lang('Group Name', 'Group Name'),
-        form_input('emma_group_name', $emma_group_name, 'class="field"'),
+        form_input('group_name', $group_name, 'class="field"'),
     ]
 );
 if (!$edit) {
