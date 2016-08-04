@@ -4,6 +4,7 @@ if ($message) {
 
     <div> <span style="color:<?php echo $message_color?>"><?php echo $message?></span>
 <?php
+
 }  ?>
 <style type="text/css">
         #emma_subscribe_form { padding: 4px; margin: 0;  }

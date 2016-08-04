@@ -25,7 +25,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         ee()->load->model('subscribe_model');
     }
 
-    public function display_settings($data = array())
+    public function display_settings($data = [])
     {
         if (!ee()->subscribe_model->check()) {
             ee()->table->add_row(
@@ -133,7 +133,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         }
 
         $add = true;
-        
+
         // is user in the system ???
         $return = 'Always: ';
         if ($settings['type'] == 'opt-in') {
@@ -150,10 +150,10 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             // new user
             $response = ee()->subscribe_model->signup($user, $groups);
 
-            echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>";
+            echo '<pre>'.__FILE__.'<br>'.__METHOD__.' : '.__LINE__.'<br><br>';
             var_dump($response);
             exit;
-            
+
 
             if (isset($response['Error']) && $response['Error'] === 0) {
                 $return .= "{$response['Message']} ({$response['AdditionalParams']})";
@@ -177,7 +177,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         }
     }
 
-    public function display_field($data = '', $params = array(), $attr = array())
+    public function display_field($data = '', $params = [], $attr = [])
     {
         if (ee()->input->get('module') == 'freeform' && ee()->input->get('method') == 'edit_entry') {
             $pattern = '/Added \((\d+)\)/';

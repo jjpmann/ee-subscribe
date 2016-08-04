@@ -14,4 +14,3 @@ echo form_open($action_url, $attributes);
     <?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
 
 <?=form_close();
-    
