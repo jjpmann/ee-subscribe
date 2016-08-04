@@ -116,14 +116,14 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $email = ee()->input->post($input);
         $user = [];
 
-        foreach ($fields as $key => $field) {
-            $v = $field['id'];
+        foreach ($fields->all() as $key => $field) {
+            $v = strtolower($key);
 
             $user[$v] = ee()->input->post($v);
 
             if (isset($this->fields[$v])) {
                 $n = $this->fields[$v];
-                $user[$field['id']] = ee()->input->post($n);
+                $user[$v] = ee()->input->post($n);
             }
         }
 
@@ -149,13 +149,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             // new user
             $response = ee()->subscribe_model->signup($user, $groups);
 
-            echo '<pre>'.__FILE__.'<br>'.__METHOD__.' : '.__LINE__.'<br><br>';
-            var_dump($response);
-            exit;
-
-
-            if (isset($response['Error']) && $response['Error'] === 0) {
-                $return .= "{$response['Message']} ({$response['AdditionalParams']})";
+            if ($response->isSuccessful()) {
+                $return .= 'Succress ('. $response->data->get('id') .')';
             } else {
                 $return .= 'Failed';
             }

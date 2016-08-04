@@ -9,9 +9,9 @@ class RealMagnetDriver extends Driver
     protected $active = false;
 
     protected $fields = [
-        'first_name'    => 'First_Name',
-        'last_name'     => 'Last_Name',
-        'email'         => 'Email',
+        'first_name' => 'First_Name',
+        'last_name' => 'Last_Name',
+        'email' => 'Email',
     ];
 
     public function __construct()
@@ -57,21 +57,14 @@ class RealMagnetDriver extends Driver
 
     public function fields()
     {
-        $fields = [];
-        $_fields = $this->client->getRecipientFields(1);
+        $fields = $this->client->getRecipientFields(1);
 
-        if (isset($_fields['CustomFields'])) {
-            foreach ($_fields['CustomFields'] as $field) {
-                $f = new \stdClass();
-                $f->id = strtolower($field['FieldName']);
-                $f->name = $field['FieldName'];
-                $f->label = $field['Label'];
-                //$f->data    = $group;
-                $fields[] = $f;
-            }
+        if ($fields->isSuccessful()) {
+            return $fields->data;
         }
 
-        return $fields;
+        return [];
+
     }
 
     public function user($email)
@@ -95,18 +88,11 @@ class RealMagnetDriver extends Driver
         // does user exists??
         $find = $this->user($user['email']);
 
-        if (empty($find)) {
-            $add = $this->client->addRecipient($u);
-
-            return $add;
+        if ($find->isSuccessful()) {
+            return $this->client->editRecipientGroups((int) $find->data->first()->get('ID'), $groups);
         }
 
-        // $current = $find[0];
-        // $id = $current['ID'];
-        // $edit = $this->client->editRecipient($id, $u);
-        // editRecipientGroups()
+        return $this->client->addRecipient($u);
 
-        // Recipient updated successfully
-        return $edit;
     }
 }
