@@ -39,13 +39,14 @@ class RealMagnetDriver extends Driver
         if (!$this->isActive()) {
             return [];
         }
-        
+
 
         $groups = $this->client->getGroups();
 
-        return $groups->data->map(function($group){
-            $group['id']    = $group['GroupID'];
-            $group['name']  = $group['GroupName'];
+        return $groups->data->map(function ($group) {
+            $group['id'] = $group['GroupID'];
+            $group['name'] = $group['GroupName'];
+
             return $group;
         });
 
@@ -108,6 +109,7 @@ class RealMagnetDriver extends Driver
 
         if (empty($find)) {
             $add = $this->client->addRecipient($u);
+
             return $add;
         }
 

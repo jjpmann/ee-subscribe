@@ -11,7 +11,7 @@ $this->table->set_heading(
 );
     $this->table->add_row([
             '<strong>Real Magnent Settings</strong>',
-            'These settings should be set in your <strong>.env</strong> file.'
+            'These settings should be set in your <strong>.env</strong> file.',
         ]
     );
     $this->table->add_row([
@@ -48,7 +48,7 @@ echo $this->table->generate();
 
 ?>
 
-	<?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
+    <?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
 
 <?=form_close()?>
 */
