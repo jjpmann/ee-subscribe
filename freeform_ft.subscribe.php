@@ -25,7 +25,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         ee()->load->model('subscribe_model');
     }
 
-    public function display_settings($data = [])
+    public function display_settings($data = array())
     {
         if (!ee()->subscribe_model->check()) {
             ee()->table->add_row(
@@ -45,6 +45,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $groups = ee()->subscribe_model->lists();
 
         $options = [];
+
 
         foreach ($groups as $id => $group) {
             $options[$group->id] = $group->name;
@@ -117,13 +118,13 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $user = [];
 
         foreach ($fields as $key => $field) {
-            $v = $field->id;
+            $v = $field['id'];
 
             $user[$v] = ee()->input->post($v);
 
             if (isset($this->fields[$v])) {
                 $n = $this->fields[$v];
-                $user[$field->id] = ee()->input->post($n);
+                $user[$field['id']] = ee()->input->post($n);
             }
         }
 
@@ -132,7 +133,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         }
 
         $add = true;
-
+        
         // is user in the system ???
         $return = 'Always: ';
         if ($settings['type'] == 'opt-in') {
@@ -148,6 +149,11 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         if ($add && $settings['entry_id'] == 0) {
             // new user
             $response = ee()->subscribe_model->signup($user, $groups);
+
+            echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>";
+            var_dump($response);
+            exit;
+            
 
             if (isset($response['Error']) && $response['Error'] === 0) {
                 $return .= "{$response['Message']} ({$response['AdditionalParams']})";
@@ -171,7 +177,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         }
     }
 
-    public function display_field($data = '', $params = [], $attr = [])
+    public function display_field($data = '', $params = array(), $attr = array())
     {
         if (ee()->input->get('module') == 'freeform' && ee()->input->get('method') == 'edit_entry') {
             $pattern = '/Added \((\d+)\)/';
