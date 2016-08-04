@@ -10,8 +10,8 @@ class RealMagnetDriver extends Driver
 
     protected $fields = [
         'first_name' => 'First_Name',
-        'last_name' => 'Last_Name',
-        'email' => 'Email',
+        'last_name'  => 'Last_Name',
+        'email'      => 'Email',
     ];
 
     public function __construct()
@@ -64,7 +64,6 @@ class RealMagnetDriver extends Driver
         }
 
         return [];
-
     }
 
     public function user($email)
@@ -93,6 +92,5 @@ class RealMagnetDriver extends Driver
         }
 
         return $this->client->addRecipient($u);
-
     }
 }
