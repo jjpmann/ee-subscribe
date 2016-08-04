@@ -46,9 +46,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
         $options = [];
 
-
-        foreach ($groups as $id => $group) {
-            $options[$group->id] = $group->name;
+        foreach ($groups->all() as $id => $group) {
+            $options[$group['id']] = $group['name'];
         }
 
         ee()->table->add_row(
