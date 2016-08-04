@@ -149,7 +149,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             $response = ee()->subscribe_model->signup($user, $groups);
 
             if ($response->isSuccessful()) {
-                $return .= 'Succress ('.$response->data->get('id').')';
+                $return .= 'Success ('.$response->data->get('id').')';
             } else {
                 $return .= 'Failed';
             }
