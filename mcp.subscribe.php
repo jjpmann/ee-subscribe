@@ -60,11 +60,8 @@ class Subscribe_mcp
         //ee()->cp->set_variable('cp_breadcrumbs', array(
         //  $this->base => lang('Subscribe')));
 
-
         $vars['realmagnet_username'] = env('REALMAGNET_USERNAME', ee()->config->item('realmagnet_username'));
         $vars['realmagnet_password'] = env('REALMAGNET_PASSWORD', ee()->config->item('realmagnet_password'));
-
-
 
         $vars['subscribe_api_key'] = (ee()->config->item('subscribe_api_key'));
         $vars['subscribe_username'] = (ee()->config->item('subscribe_username'));
@@ -99,7 +96,6 @@ class Subscribe_mcp
 
         //ee()->config->_update_config($insert);
 
-
         ee()->session->set_flashdata('message_success', lang('settings_updated'));
 
         ee()->functions->redirect($this->base.AMP.'method=settings');
@@ -115,7 +111,6 @@ class Subscribe_mcp
         }
 
         $groups = ee()->subscribe_model->lists();
-
 
         $i = 1;
         if ($groups) {
@@ -334,7 +329,6 @@ class Subscribe_mcp
                 ee()->session->set_flashdata('message_failure', lang($member_details->error));
                 ee()->functions->redirect($this->base.AMP);
             }
-
 
             $action_url = $this->base.AMP.'method=subscribe_add_user_form_submit&id='.$_GET['id'].'&group_id='.$_GET['group_id'];
             $fv_url = $this->base.AMP.'method=subscribe_add_user_form_validation&id='.$_GET['id'];

@@ -36,7 +36,6 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             return;
         }
 
-
         $list = isset($data['list']) ? $data['list'] : false;
         $type = isset($data['type']) ? $data['type'] : false;
         $text = isset($data['text']) ? $data['text'] : false;
@@ -150,7 +149,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             $response = ee()->subscribe_model->signup($user, $groups);
 
             if ($response->isSuccessful()) {
-                $return .= 'Succress ('. $response->data->get('id') .')';
+                $return .= 'Succress ('.$response->data->get('id').')';
             } else {
                 $return .= 'Failed';
             }

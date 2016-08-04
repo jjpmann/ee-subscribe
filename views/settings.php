@@ -40,7 +40,6 @@ $this->table->set_heading(
 
         echo $this->table->generate();
 
-
 /*
 
 ?>

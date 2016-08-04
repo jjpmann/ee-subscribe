@@ -9,7 +9,6 @@ if ($rows) {
         $this->table->add_row($row);
     }
 
-
     echo $this->table->generate();
 } else {
     ?>

@@ -8,7 +8,6 @@ foreach ($rows as $row) {
     $this->table->add_row($row);
 }
 
-
 echo $this->table->generate();
 /*   */
 
