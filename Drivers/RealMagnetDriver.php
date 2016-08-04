@@ -40,7 +40,6 @@ class RealMagnetDriver extends Driver
             return [];
         }
 
-
         $groups = $this->client->getGroups();
 
         return $groups->data->map(function ($group) {
@@ -49,17 +48,6 @@ class RealMagnetDriver extends Driver
 
             return $group;
         });
-
-
-        foreach ($_groups->data as $group) {
-            $g = new \stdClass();
-            $g->id = $group['GroupID'];
-            $g->name = $group['GroupName'];
-            $g->data = $group;
-            $groups[] = $g;
-        }
-
-        return $groups;
     }
 
     public function group($id)
