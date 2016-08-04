@@ -7,3 +7,4 @@ composer.phar
 drivers/Test.php
 test
 Test.php
+.php_cs.cache

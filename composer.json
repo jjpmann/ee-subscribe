@@ -20,7 +20,13 @@
     "require": {
         "php": ">=5.3.10",
         "composer/installers": ">=1.1.0",
-        "jjpmann/real-magnet-sdk": ">=0.1.1"
+        "jjpmann/real-magnet-sdk": ">=0.1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "^0.9.5",
+        "sllh/php-cs-fixer-styleci-bridge": "^2.1",
+        "friendsofphp/php-cs-fixer": "^1.11"
     },
     "extra": {
         "installer-name": "subscribe"
