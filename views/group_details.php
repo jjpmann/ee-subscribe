@@ -14,5 +14,5 @@ if ($rows) {
 } else {
     ?>
     <strong> No results found </strong>    
-<?php 
+<?php
 } ?>

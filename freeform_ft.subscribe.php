@@ -29,8 +29,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
     {
         if (!ee()->subscribe_model->check()) {
             ee()->table->add_row(
-             '<h3>Error</h3>',
-             '<div class="subtext ss_notice">Your configuration is not working, please visit the settings page and update your username/password.</div>'
+                '<h3>Error</h3>',
+                '<div class="subtext ss_notice">Your configuration is not working, please visit the settings page and update your username/password.</div>'
             );
 
             return;
@@ -51,7 +51,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         }
 
         ee()->table->add_row(
-           'List <div class="subtext">Selet the list users will sign up to.</div>',
+            'List <div class="subtext">Selet the list users will sign up to.</div>',
             form_dropdown('subscribe_list', $options, $list)
         );
 
@@ -67,12 +67,12 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         );
 
         ee()->table->add_row(
-           'Opt-In Text <div class="subtext">Displayed with Checkbox if Opt-In is selected</div>',
+            'Opt-In Text <div class="subtext">Displayed with Checkbox if Opt-In is selected</div>',
             form_input('subscribe_opt-in_text', $text)
         );
 
         ee()->table->add_row(
-           'Email Field<div class="subtext">If the input field on the page is not "email" please entrer the name. (exp. the marketo form used "work_email")</div>',
+            'Email Field<div class="subtext">If the input field on the page is not "email" please entrer the name. (exp. the marketo form used "work_email")</div>',
             form_input('subscribe_field', $field)
         );
     }
@@ -201,8 +201,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
             'id'    => $id,
             'value' => 'y',
             'class' => 'form__check',
-        ]).form_label($text, $id, [
+            ]).form_label($text, $id, [
             'class' => 'form__label form__label--check',
-        ]);
+            ]);
     }
 }

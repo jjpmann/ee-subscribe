@@ -10,21 +10,19 @@ $this->table->set_template($cp_pad_table_template);
 $this->table->add_row([
         lang('Group Name', 'Group Name'),
         form_input('group_name', $group_name, 'class="field"'),
-    ]
-);
+    ]);
 if (!$edit) {
     $this->table->add_row([
             lang('Make this a Test Group', 'test_group'),
             form_checkbox('test_group', '1'),
-        ]
-    );
+        ]);
 }
 
 echo $this->table->generate();
 ?>
 <?=form_submit(['name' => 'submit', 'value' => lang('submit'), 'class' => 'submit'])?>
 <?=form_close()?>
-		<script>$("#emma_add_edit_group_form").submit(function () {
+        <script>$("#emma_add_edit_group_form").submit(function () {
         var return_value;
         fv_url=(("<?php echo htmlspecialchars_decode($fv_url)?>"));
          $.ajax({
@@ -35,10 +33,10 @@ echo $this->table->generate();
                 beforeSend: function() {
                     $("#emma_add_edit_group_form input.submit").after('<span id="submit_loading">&nbsp&nbsp;&nbsp&nbsp;<img alt="Loading" src="themes/cp_themes/default/images/indicator.gif"></span>');
 
-                },		
+                },      
                 complete: function() {
                    $('#submit_loading').remove();
-                },	                
+                },                  
                 success: function(msg){      
                     if(msg==1)
                     {
@@ -59,5 +57,5 @@ echo $this->table->generate();
           });         
           return return_value;      
 
-		});
+        });
         </script>

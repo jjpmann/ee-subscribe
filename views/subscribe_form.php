@@ -1,10 +1,10 @@
-<?php 
-    if ($message) {
-        ?>
+<?php
+if ($message) {
+    ?>
 
     <div> <span style="color:<?php echo $message_color?>"><?php echo $message?></span>
-<?php 
-    }  ?>
+<?php
+}  ?>
 <style type="text/css">
         #emma_subscribe_form { padding: 4px; margin: 0;  }
         #emma_subscribe_form label { padding: 4px 0; text-align: left; }
@@ -30,5 +30,5 @@
 
     echo form_hidden('emma_subscribe', '1', 'class="field"')
 ?>
-	<?=form_submit(['name' => 'submit', 'value' => lang('Submit')])?>
+    <?=form_submit(['name' => 'submit', 'value' => lang('Submit')])?>
 <?=form_close()?>    

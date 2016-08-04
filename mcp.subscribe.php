@@ -23,18 +23,20 @@ class Subscribe_mcp
 
         $this->base = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module='.$this->module_name;
         $this->form_base = 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module='.$this->module_name;
-        ee()->cp->set_right_nav([
+        ee()->cp->set_right_nav(
+            [
                     'settings'               => $this->base.AMP.'method=settings',
                     'subscribe_list_manage'  => $this->base.AMP.'method=subscribe_lists',
                    // 'subscribe_stats'    => $this->base.AMP.'method=subscribe_stats',
-                ]);
+            ]
+        );
         ee()->load->model('subscribe_model');
         // uncomment this if you want navigation buttons at the top
-/*      ee()->cp->set_right_nav(array(
+        /*      ee()->cp->set_right_nav(array(
                 'home'          => $this->base,
                 'some_language_key' => $this->base.AMP.'method=some_method_here',
             ));
-*/
+        */
     }
 
     public function index()
@@ -121,24 +123,24 @@ class Subscribe_mcp
                 $first_day = date('Y-m').'-01';
                 $first_day_time = strtotime($first_day); //first day of month
 
-            $attr = [
+                $attr = [
                 'onclick' => "return confirm('Are you sure to Delete this Group?')",
-            ];
+                ];
                 $actions = [
                     anchor($this->base.AMP.'method=subscribe_add_edit_group_form&id='.$group['id'], lang('Rename')),
                     anchor($this->base.AMP.'method=subscribe_group_delete_submit&id='.$group['id'].'&group_id='.$group['id'], lang('Delete'), $attr),
                     ee()->config->item('subscribe_default_group') != $group['id'] ? anchor($this->base.AMP.'method=subscribe_default_group_submit&id='.$group['id'], lang('Set as default')) : '',
-            ];
+                ];
                 $rows[] = [
-              $i,
-              $group['name'], //   anchor($this->base.AMP.'method=subscribe_group_details&id='.$group['id'], $group['name']),
-              //$group->active_count+$group->optout_count+$group->error_count,
-              //$group->active_count,
-              //$group->optout_count,
-             // $new_subscriber_count,
-             // '',//($group->group_type=='g')?lang('Regular'):lang('Test'),
-              '', //implode(' | ', $actions),
-            ];
+                $i,
+                $group['name'], //   anchor($this->base.AMP.'method=subscribe_group_details&id='.$group['id'], $group['name']),
+                //$group->active_count+$group->optout_count+$group->error_count,
+                //$group->active_count,
+                //$group->optout_count,
+                // $new_subscriber_count,
+                // '',//($group->group_type=='g')?lang('Regular'):lang('Test'),
+                '', //implode(' | ', $actions),
+                ];
                 $i++;
             }
         }
@@ -196,8 +198,8 @@ class Subscribe_mcp
         ];
         // ee()->cp->set_variable('cp_breadcrumbs', array(
         //  $this->base => lang('Subscribe'),
-  //           $this->base.AMP.'method=subscribe_lists'=>lang('Subscribe List'),
-  //           ));
+        //           $this->base.AMP.'method=subscribe_lists'=>lang('Subscribe List'),
+        //           ));
         $vars['fv_url'] = $this->base.AMP.'method=subscribe_add_edit_group_form_validation';
 
         return ee()->load->view('add_edit_group_form', $vars, true);
@@ -307,11 +309,11 @@ class Subscribe_mcp
             $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
         ];
         // ee()->cp->set_variable('cp_breadcrumbs',
-  //               array(
-  //                   $this->base => lang('Subscribe'),
-  //                   $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
-  //                   )
-  //           );
+        //               array(
+        //                   $this->base => lang('Subscribe'),
+        //                   $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
+        //                   )
+        //           );
         $vars = ['rows'                  => $rows,
                       'header'           => $header,
                       'add_group_anchor' => $add_group_anchor,
@@ -366,12 +368,12 @@ class Subscribe_mcp
             $this->base.AMP.'method=subscribe_group_details&id='.$_GET['group_id'] => lang('Subscribe Group Members'),
         ];
         // ee()->cp->set_variable('cp_breadcrumbs',
-  //               array(
-  //                   $this->base => lang('Subscribe'),
-  //                   $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
-  //                   $this->base.AMP.'method=subscribe_group_details&id='.$_GET['group_id'] => lang('Subscribe Group Members'),
-  //                   )
-  //           );
+        //               array(
+        //                   $this->base => lang('Subscribe'),
+        //                   $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
+        //                   $this->base.AMP.'method=subscribe_group_details&id='.$_GET['group_id'] => lang('Subscribe Group Members'),
+        //                   )
+        //           );
         $vars = [
                         'fields'            => $fields,
                         'groups_list'       => $groups_list,
@@ -399,12 +401,12 @@ class Subscribe_mcp
             $this->base.AMP.'method=subscribe_group_details&id='.$_GET['group_id'] => lang('Subscribe Group Members'),
         ];
         // ee()->cp->set_variable('cp_breadcrumbs',
-  //               array(
-  //                   $this->base => lang('Subscribe'),
-  //                   $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
-  //                   $this->base.AMP.'method=subscribe_group_details&id='.$_GET['group_id'] => lang('Subscribe Group Members'),
-  //                   )
-  //           );
+        //               array(
+        //                   $this->base => lang('Subscribe'),
+        //                   $this->base.AMP.'method=subscribe_lists' => lang('Subscribe Lists'),
+        //                   $this->base.AMP.'method=subscribe_group_details&id='.$_GET['group_id'] => lang('Subscribe Group Members'),
+        //                   )
+        //           );
         $vars = [
                         'user_status' => $user_status,
                         'action_url'  => $this->base.AMP.'method=subscribe_edit_user_status_form_submit&id='.$_GET['id'].'&current_status='.$user_status.'&group_id='.$_GET['group_id'],
@@ -527,9 +529,9 @@ class Subscribe_mcp
         ee()->functions->redirect($this->base.AMP.'method=subscribe_edit_user_status_form&id='.ee()->input->get('id').'&group_id='.$_GET['group_id']);
     }
 
-/*
-Code for Subscribe Stats
-*/
+    /*
+    Code for Subscribe Stats
+    */
     public function subscribe_stats()
     {
         if (!ee()->subscribe_model->check()) {
@@ -551,41 +553,63 @@ Code for Subscribe Stats
                 if ($mailing->send_started) {
                     if ($mailing->send_finished) {
                         $time_date = str_replace('@D:', '', $mailing->send_started);
-                    //list($date,$time)=explode('T',$time_date);
-                    $time_date = str_replace('T', ' ', $time_date);
+                        //list($date,$time)=explode('T',$time_date);
+                        $time_date = str_replace('T', ' ', $time_date);
                         $send_details = date('l jS \of F Y h:i:s A', strtotime($time_date));
-                    //echo $date.'<br>';
-                    //echo $time.'<br>';
+                        //echo $date.'<br>';
+                        //echo $time.'<br>';
                     } else {
                         $send_details = lang('In Progress');
                     }
                 }
                 switch ($mailing->mailing_status) {
-                case 'p':$mailing_status = lang('Pending'); break;
-                case 'a':$mailing_status = lang('Paused'); break;
-                case 's':$mailing_status = lang('In Progress'); break;
-                case 'x':$mailing_status = lang('Canceled'); break;
-                case 'c':$mailing_status = lang('Complete'); break;
-                case 'f':$mailing_status = lang('Failed'); break;
-                default:$mailing_status = '--'; break;
-            }
+                    case 'p':
+                        $mailing_status = lang('Pending');
+                        break;
+                    case 'a':
+                        $mailing_status = lang('Paused');
+                        break;
+                    case 's':
+                        $mailing_status = lang('In Progress');
+                        break;
+                    case 'x':
+                        $mailing_status = lang('Canceled');
+                        break;
+                    case 'c':
+                        $mailing_status = lang('Complete');
+                        break;
+                    case 'f':
+                        $mailing_status = lang('Failed');
+                        break;
+                    default:
+                        $mailing_status = '--';
+                        break;
+                }
 
                 switch ($mailing->mailing_type) {
-                case 'm':$mailing_type = lang('Regular'); break;
-                case 't':$mailing_type = lang('Test'); break;
-                case 'r':$mailing_type = lang('Trigger'); break;
-                default:$mailing_type = '--'; break;
-            }
+                    case 'm':
+                        $mailing_type = lang('Regular');
+                        break;
+                    case 't':
+                        $mailing_type = lang('Test');
+                        break;
+                    case 'r':
+                        $mailing_type = lang('Trigger');
+                        break;
+                    default:
+                        $mailing_type = '--';
+                        break;
+                }
                 $rows[] = [
-              $i,
-              $mailing->name,
-              $mailing->subject,
-              $mailing_status,
-              $mailing_type,
-              $mailing->recipient_count,
-              $send_details,
-              anchor($this->base.AMP.'method=mailing_report&id='.$mailing->mailing_id, 'View Details', 'title="Details"'),
-            ];
+                $i,
+                $mailing->name,
+                $mailing->subject,
+                $mailing_status,
+                $mailing_type,
+                $mailing->recipient_count,
+                $send_details,
+                anchor($this->base.AMP.'method=mailing_report&id='.$mailing->mailing_id, 'View Details', 'title="Details"'),
+                ];
                 $i++;
             }
         }
@@ -599,7 +623,7 @@ Code for Subscribe Stats
     public function mailing_report()
     {
         ee()->load->library('table');
-       // ee()->load->model('subscribe_model');
+        // ee()->load->model('subscribe_model');
         $mailing_id = $_GET['id'];
         $response = ee()->subscribe_model->getMailingDetails($_GET['id']);
         $rows[] = [
@@ -642,10 +666,10 @@ Code for Subscribe Stats
             $this->base                              => lang('Subscribe'),
             $this->base.AMP.'method=subscribe_stats' => lang('Mailings'),
         ];
-   //      ee()->cp->set_variable('cp_breadcrumbs', array(
+        //      ee()->cp->set_variable('cp_breadcrumbs', array(
             // $this->base => lang('Subscribe'),
-   //          $this->base.AMP.'method=subscribe_stats'=> lang('Mailings'),
-   //          ));
+        //          $this->base.AMP.'method=subscribe_stats'=> lang('Mailings'),
+        //          ));
         return ee()->load->view('mailing_report', $vars, true);
     }
 
@@ -661,84 +685,83 @@ Code for Subscribe Stats
             case 'signups':
             case 'optouts':
             case 'opens':
-                        $title_page = $title = ucfirst($type).' Report';
-                        $header = [lang('No:'), lang('Name'), lang('Email'), lang('When')];
-                        $i = 1;
-                        foreach ($response as $info) {
-                            $timestamp = str_replace('@D:', '', $info->timestamp);
-                            $timestamp = str_replace('T', ' ', $timestamp);
-                            $timestamp = date('l jS \of F Y h:i:s A', strtotime($timestamp));
-                            $user_details = ee()->subscribe_model->get_member_detail($info->member_id);
-                            $rows[] = [
-                              $i,
-                              ((isset($user_details->fields->first_name)) ? $user_details->fields->first_name : '').' '.((isset($user_details->fields->last_name)) ? $user_details->fields->last_name : ''),
-                              $info->email,
-                              $timestamp,
-                            ];
-                            $i++;
-                        }
-                        break;
+                $title_page = $title = ucfirst($type).' Report';
+                $header = [lang('No:'), lang('Name'), lang('Email'), lang('When')];
+                $i = 1;
+                foreach ($response as $info) {
+                    $timestamp = str_replace('@D:', '', $info->timestamp);
+                    $timestamp = str_replace('T', ' ', $timestamp);
+                    $timestamp = date('l jS \of F Y h:i:s A', strtotime($timestamp));
+                    $user_details = ee()->subscribe_model->get_member_detail($info->member_id);
+                    $rows[] = [
+                    $i,
+                    ((isset($user_details->fields->first_name)) ? $user_details->fields->first_name : '').' '.((isset($user_details->fields->last_name)) ? $user_details->fields->last_name : ''),
+                    $info->email,
+                    $timestamp,
+                    ];
+                    $i++;
+                }
+                break;
             case 'clicks':
-                        $title_page = lang('Clicks Report');
-                        $title = lang('Links Details');
-                        $header = [lang('No:'), lang('Name'), lang('Target'), lang('Unique Clicks'), lang('Total Clicks')];
-                        $links = ee()->subscribe_model->get_links($mailing_id);
-                        $links_row = [];
-                        foreach ($links as $link) {
-                            $i = 1;
-                            $links_row[$link->link_id] = [
-                              $i,
-                              'link_name'   => $link->link_name,
-                              'link_target' => $link->link_target,
-                              $link->unique_clicks,
-                              $link->total_clicks,
-                            ];
-                            $i++;
-                        }
-                        $extra_info['title'] = 'Clicks Report';
-                        $extra_info['header'] = [lang('No:'), lang('Name'), lang('Email'), lang('When'), lang('Url Name'), lang('Url Target')];
-                        $i = 1;
-                        foreach ($response as $info) {
-                            $timestamp = str_replace('@D:', '', $info->timestamp);
-                            $timestamp = str_replace('T', ' ', $timestamp);
-                            $timestamp = date('l jS \of F Y h:i:s A', strtotime($timestamp));
-                            $user_details = ee()->subscribe_model->get_member_detail($info->member_id);
-                            $rows[] = [
-                              $i,
-                              ((isset($user_details->fields->first_name)) ? $user_details->fields->first_name : '').' '.((isset($user_details->fields->last_name)) ? $user_details->fields->last_name : ''),
-                              $info->email,
-                              $timestamp,
-                              $links_row[$info->link_id]['link_name'],
-                              $links_row[$info->link_id]['link_target'],
-                            ];
-                            $i++;
-                        }
-                        $extra_info['rows'] = $rows;
-                        $rows = [];
-                        $rows = $links_row;
-                        break;
+                $title_page = lang('Clicks Report');
+                $title = lang('Links Details');
+                $header = [lang('No:'), lang('Name'), lang('Target'), lang('Unique Clicks'), lang('Total Clicks')];
+                $links = ee()->subscribe_model->get_links($mailing_id);
+                $links_row = [];
+                foreach ($links as $link) {
+                    $i = 1;
+                    $links_row[$link->link_id] = [
+                    $i,
+                    'link_name'   => $link->link_name,
+                    'link_target' => $link->link_target,
+                    $link->unique_clicks,
+                    $link->total_clicks,
+                    ];
+                    $i++;
+                }
+                $extra_info['title'] = 'Clicks Report';
+                $extra_info['header'] = [lang('No:'), lang('Name'), lang('Email'), lang('When'), lang('Url Name'), lang('Url Target')];
+                $i = 1;
+                foreach ($response as $info) {
+                    $timestamp = str_replace('@D:', '', $info->timestamp);
+                    $timestamp = str_replace('T', ' ', $timestamp);
+                    $timestamp = date('l jS \of F Y h:i:s A', strtotime($timestamp));
+                    $user_details = ee()->subscribe_model->get_member_detail($info->member_id);
+                    $rows[] = [
+                    $i,
+                    ((isset($user_details->fields->first_name)) ? $user_details->fields->first_name : '').' '.((isset($user_details->fields->last_name)) ? $user_details->fields->last_name : ''),
+                    $info->email,
+                    $timestamp,
+                    $links_row[$info->link_id]['link_name'],
+                    $links_row[$info->link_id]['link_target'],
+                    ];
+                    $i++;
+                }
+                $extra_info['rows'] = $rows;
+                $rows = [];
+                $rows = $links_row;
+                break;
 
             case 'shares':
-                        $title_page = $title = lang('Shares Report');
-                        $header = [lang('No:'), lang('Name'), lang('Email'), lang('When'), lang('Network'), lang('Visits from Network')];
-                        $i = 1;
-                        foreach ($response as $info) {
-                            $timestamp = str_replace('@D:', '', $info->timestamp);
-                            $timestamp = str_replace('T', ' ', $timestamp);
-                            $timestamp = date('l jS \of F Y h:i:s A', strtotime($timestamp));
-                            $user_details = ee()->subscribe_model->get_member_detail($info->member_id);
-                            $rows[] = [
-                              $i,
-                              ((isset($user_details->fields->first_name)) ? $user_details->fields->first_name : '').' '.((isset($user_details->fields->last_name)) ? $user_details->fields->last_name : ''),
-                              $info->email,
-                              $timestamp,
-                              ucfirst($info->network),
-                              $info->share_clicks,
-                            ];
-                            $i++;
-                        }
-                        break;
-
+                $title_page = $title = lang('Shares Report');
+                $header = [lang('No:'), lang('Name'), lang('Email'), lang('When'), lang('Network'), lang('Visits from Network')];
+                $i = 1;
+                foreach ($response as $info) {
+                    $timestamp = str_replace('@D:', '', $info->timestamp);
+                    $timestamp = str_replace('T', ' ', $timestamp);
+                    $timestamp = date('l jS \of F Y h:i:s A', strtotime($timestamp));
+                    $user_details = ee()->subscribe_model->get_member_detail($info->member_id);
+                    $rows[] = [
+                    $i,
+                    ((isset($user_details->fields->first_name)) ? $user_details->fields->first_name : '').' '.((isset($user_details->fields->last_name)) ? $user_details->fields->last_name : ''),
+                    $info->email,
+                    $timestamp,
+                    ucfirst($info->network),
+                    $info->share_clicks,
+                    ];
+                    $i++;
+                }
+                break;
         }
         $vars = [
             'rows'       => $rows,
@@ -755,11 +778,11 @@ Code for Subscribe Stats
             $this->base.AMP.'method=subscribe_stats'                => lang('Mailings'),
             $this->base.AMP.'method=mailing_report&id='.$mailing_id => lang('Mailing Report'),
         ];
-   //      ee()->cp->set_variable('cp_breadcrumbs', array(
+        //      ee()->cp->set_variable('cp_breadcrumbs', array(
             // $this->base => lang('Subscribe'),
-   //          $this->base.AMP.'method=subscribe_stats'=> lang('Mailings'),
-   //          $this->base.AMP.'method=mailing_report&id='.$mailing_id=> lang('Mailing Report'),
-   //          ));
+        //          $this->base.AMP.'method=subscribe_stats'=> lang('Mailings'),
+        //          $this->base.AMP.'method=mailing_report&id='.$mailing_id=> lang('Mailing Report'),
+        //          ));
         return ee()->load->view('type_details', $vars, true);
     }
 }
