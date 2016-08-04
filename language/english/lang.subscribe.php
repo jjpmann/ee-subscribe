@@ -17,7 +17,7 @@ $lang['subscribe_api_key'] = 'Account ID';
 $lang['subscribe_username'] = 'Public API Key';
 $lang['subscribe_password'] = 'Private API Key';
 
-// Drives 
+// Drives
 // Real Magnet Lang
 $lang['realmagnet_username'] = 'Real Magnet Username';
 $lang['realmagnet_password'] = 'Real Magnet Password';

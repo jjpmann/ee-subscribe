@@ -110,8 +110,8 @@
                            $date = str_replace('@D:', '', $member_details->fields->$shortcut_name);
                            list($year, $month, $day) = explode('-', $date);
                        } else {
-                            $year = $month = $day = 0;
-                        }
+                           $year = $month = $day = 0;
+                       }
                         $default = [
                             'day'   => $day,
                             'month' => $month,

@@ -19,7 +19,7 @@
 
     $attributes = ['id' => 'emma_subscribe_form'];
     echo form_open($action_url, $attributes);
-    $tmpl =  ['table_open'  => '<table width="100%" border="1" cellpadding="4px" cellspacing="1"'];
+    $tmpl = ['table_open'  => '<table width="100%" border="1" cellpadding="4px" cellspacing="1"'];
     $this->table->set_template($tmpl);
     $this->table->add_row([
         '<label>Name</label>', '<input type="text" name="name" id="name"/>', ]);

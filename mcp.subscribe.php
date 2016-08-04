@@ -78,7 +78,7 @@ class Subscribe_mcp
         // ee()->form_validation->set_rules('subscribe_api_key', 'Subscribe Api Key', 'required');
         // ee()->form_validation->set_rules('subscribe_username', 'Subscribe Username', 'required');
         // ee()->form_validation->set_rules('subscribe_password', 'Subscribe Password', 'required');
-        
+
         $valid_form = ee()->form_validation->run();
         if ($valid_form) {
             echo 1;
@@ -113,7 +113,7 @@ class Subscribe_mcp
         }
 
         $groups = ee()->subscribe_model->lists();
-        
+
 
         $i = 1;
         if ($groups) {
@@ -159,7 +159,7 @@ class Subscribe_mcp
         //  $this->base => lang('Subscribe')));
 
         $add_group_anchor = anchor($this->base.AMP.'method=subscribe_add_edit_group_form', lang('Add a New Group'));
-        
+
         $vars = ['rows'                  => $rows,
                       'header'           => $header,
                       'add_group_anchor' => $add_group_anchor,
@@ -176,14 +176,14 @@ class Subscribe_mcp
             $group_info = ee()->subscribe_model->getSubscribeGroupInfo($group_id);
             $vars = [
                     'action_url'           => $this->base.AMP.'method=subscribe_edit_group_form_submit&id='.$group_id,
-                    'group_name' => $group_info->group_name,
+                    'group_name'           => $group_info->group_name,
                     'edit'                 => 1,
             ];
         } else {
             $title = lang('Add Group');
             $vars = [
                     'action_url'           => $this->base.AMP.'method=subscribe_add_group_form_submit',
-                    'group_name' => '',
+                    'group_name'           => '',
                     'edit'                 => 0,
             ];
         }
