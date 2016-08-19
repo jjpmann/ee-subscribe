@@ -109,7 +109,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
         $settings = $this->settings;
 
-        $groups[] = $settings['list'];
+        $groups[] = env('REALMAGNET_GROUP', $settings['list']);
         $input = $settings['field'] ?: 'email';
 
         $email = ee()->input->post($input);
