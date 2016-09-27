@@ -39,6 +39,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $list = isset($data['list']) ? $data['list'] : false;
         $type = isset($data['type']) ? $data['type'] : false;
         $text = isset($data['text']) ? $data['text'] : false;
+        $auto = isset($data['auto']) ? $data['auto'] : false;
         $field = isset($data['field']) ? $data['field'] : false;
 
         $groups = ee()->subscribe_model->lists();
@@ -66,6 +67,12 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         );
 
         ee()->table->add_row(
+            'Opt-In Autocheck <div class="subtext">Autocheck Checkbox if Opt-In is selected</div>',
+            '<label style="padding:0 5px">Enabled</label>'.
+                form_checkbox('subscribe_auto', 'true', $auto == 'true')
+        );
+
+        ee()->table->add_row(
             'Opt-In Text <div class="subtext">Displayed with Checkbox if Opt-In is selected</div>',
             form_input('subscribe_opt-in_text', $text)
         );
@@ -81,12 +88,14 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $list = ee()->input->post('subscribe_list');
         $type = ee()->input->post('subscribe_type');
         $text = ee()->input->post('subscribe_opt-in_text');
+        $auto = ee()->input->post('subscribe_auto');
         $field = ee()->input->post('subscribe_field');
 
         return [
             'list'  => $list,
             'type'  => $type,
             'text'  => $text,
+            'auto'  => $auto,
             'field' => $field,
         ];
     }
@@ -187,6 +196,9 @@ class Subscribe_freeform_ft extends Freeform_base_ft
         $s = $this->settings;
         $type = (isset($s['type']) && $s['type']) ? $s['type'] : 'opt-in';
         $text = (isset($s['text']) && $s['text']) ? $s['text'] : $this->text;
+        $auto = isset($s['auto']) && $s['auto'] == 'true';
+        //echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( $auto ); exit;
+        
 
         if ($type == 'always') {
             return form_hidden($this->field_name, 'always');
@@ -194,14 +206,21 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
         $id = 'freeform_field_'.$this->field_id;
 
-        return form_hidden($this->field_name, 'opt-in').
-            form_checkbox([
+        $checkboxOpts =  [
             'name'  => $this->field_name.'_opt-in',
             'id'    => $id,
             'value' => 'y',
             'class' => 'form__check',
-            ]).form_label($text, $id, [
-            'class' => 'form__label form__label--check',
+        ];
+
+        if ($auto) {
+            $checkboxOpts['checked'] = 'checked';
+        }
+
+        return form_hidden($this->field_name, 'opt-in').
+            form_checkbox($checkboxOpts).
+            form_label($text, $id, [
+                'class' => 'form__label form__label--check',
             ]);
     }
 }
