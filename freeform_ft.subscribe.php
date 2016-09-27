@@ -1,12 +1,13 @@
 <?php
 
+require_once('config.php');
 
 class Subscribe_freeform_ft extends Freeform_base_ft
 {
     public $info = [
-        'name'          => 'Subscribe',
-        'version'       => '1.0',
-        'description'   => 'Allow to dynamically signup for Real Magnet lists and Others',
+        'name'          => SUBSCRIBE_MOD_NAME,
+        'version'       => SUBSCRIBE_VERSION,
+        'description'   => SUBSCRIBE_DESCRIPTION,
     ];
 
     public $show_label = false;

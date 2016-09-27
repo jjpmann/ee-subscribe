@@ -7,6 +7,9 @@
  *
  * @link        https://github.com/jjpmann
  */
+
+require_once('config.php');
+
 class Subscribe
 {
     public $return_data;

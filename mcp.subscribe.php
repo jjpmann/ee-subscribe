@@ -7,11 +7,14 @@
  *
  * @link        https://github.com/jjpmann
  */
+
+require_once('config.php');
+
 class Subscribe_mcp
 {
     public $base;           // the base url for this module
     public $form_base;      // base url for forms
-    public $module_name = 'subscribe';
+    public $module_name = SUBSCRIBE_MOD_NAME;
 
     public $settings = [];
 
@@ -21,8 +24,8 @@ class Subscribe_mcp
     {
         // Make a local reference to the ExpressionEngine super object
 
-        $this->base = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module='.$this->module_name;
-        $this->form_base = 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module='.$this->module_name;
+        $this->base = BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module='.strtolower($this->module_name);
+        $this->form_base = 'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module='.strtolower($this->module_name);
         ee()->cp->set_right_nav(
             [
                     'settings'               => $this->base.AMP.'method=settings',

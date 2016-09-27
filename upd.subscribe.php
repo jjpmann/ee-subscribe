@@ -7,10 +7,13 @@
  *
  * @link        https://github.com/jjpmann
  */
+
+require_once('config.php');
+
 class Subscribe_upd
 {
-    public $version = '1.0';
-    public $module_name = 'Subscribe';
+    public $version     = SUBSCRIBE_VERSION;
+    public $module_name = SUBSCRIBE_MOD_NAME;
 
     public function __construct($switch = true)
     {
