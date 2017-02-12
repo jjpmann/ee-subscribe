@@ -16,7 +16,7 @@ class Subscribe
 
     public function __construct()
     {
-        ee()->load->model('subscribe_model');
+        //ee()->load->model('subscribe_model');
     }
 
     /**
