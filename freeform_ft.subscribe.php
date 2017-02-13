@@ -23,11 +23,12 @@ class Subscribe_freeform_ft extends Freeform_base_ft
     public function __construct()
     {
         parent::__construct();
-        ee()->load->model('subscribe_model');
     }
 
     public function display_settings($data = [])
     {
+        ee()->load->model('subscribe_model');
+
         if (!ee()->subscribe_model->check()) {
             ee()->table->add_row(
                 '<h3>Error</h3>',
@@ -113,6 +114,7 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
     public function save($data)
     {
+        ee()->load->model('subscribe_model');
 
         // Does not fire on opt-in if checkbox is not selected
         $fields = ee()->subscribe_model->getFields();
@@ -175,6 +177,8 @@ class Subscribe_freeform_ft extends Freeform_base_ft
 
     public function install()
     {
+        ee()->load->model('subscribe_model');
+        
         if (!ee()->subscribe_model->check()) {
             return ee()->_mcp_reference->actions->full_stop(lang('subscribe_not_installed'));
         }
