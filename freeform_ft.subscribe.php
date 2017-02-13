@@ -23,6 +23,9 @@ class Subscribe_freeform_ft extends Freeform_base_ft
     public function __construct()
     {
         parent::__construct();
+        if (REQ == 'CP') {
+            ee()->load->model('subscribe_model');
+        }
     }
 
     public function display_settings($data = [])
